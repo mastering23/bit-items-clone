@@ -10,9 +10,9 @@ const client = new Client({
 });
 
 
- client.connect();
- console.log('Conneting .... ✅');
- client.end();
- console.log('Disconnected .... ❌');
+//  client.connect();
+//  console.log('Conneting .... ✅');
+//  client.end();
+//  console.log('Disconnected .... ❌');
 
 module.exports = client;

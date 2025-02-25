@@ -36,3 +36,11 @@ TESTING React Vite up and running
 TESTING client.cjs up and running
 ![alt text](img/image-1.png)
 
+after a cloned the project
+i was avaible to connected seed.cjs
+![alt text](img/image4.png) 
+
+tablets was created connections is working fine,
+sql command create tables is work fine as well.
+
+![alt text](image.png)
