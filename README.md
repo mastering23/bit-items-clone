@@ -63,4 +63,9 @@ i was able to find the hash password,
  on postgres database.
 ![alt text](img/image6.png)
 
+on bititems.cjs i was able to query data into the table card_item
+also console.log the fake data 
+
+![alt text](img/image7.png)
+![alt text](img/image8.png)
 

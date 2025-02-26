@@ -1,4 +1,5 @@
 require('dotenv').config({ path: './env/.env' });
+const { addCardItem } = require('./bititems.cjs');
 const client = require("./client.cjs");
 const { addUserCard } = require('./users.cjs');
 
@@ -28,13 +29,13 @@ const createTables = async () => {
         username VARCHAR(30) NOT NULL UNIQUE,
         password VARCHAR(60) NOT NULL
       );
-
-      -- Creating the card_item table
+    
+     -- Creating the card_item table with name, description, and number columns
       CREATE TABLE IF NOT EXISTS card_item (
         id SERIAL PRIMARY KEY,
         name VARCHAR(30) NOT NULL,
-        details VARCHAR(100),
-        price DECIMAL(10, 2) NOT NULL
+        description VARCHAR(100) NOT NULL,
+        number INT NOT NULL
       );
 
       -- Creating the user_card_item table (with foreign keys to user_card and card_item)
@@ -61,11 +62,18 @@ const seedAsync = async () => {
   
     await dropAllTables();
     await createTables();
+
+    await addUserCard('admin','admin');
     await addUserCard('randy20','cool20');
     await addUserCard('mikequest','ten10');
     await addUserCard('mariesmall','sweetlucky7');
 
-
+    await addCardItem('Red Card', 'fire card', 2000);
+    await addCardItem('Blue Card', 'water card', 1500);
+    await addCardItem('Green Card', 'earth card', 1800);
+    await addCardItem('Yellow Card', 'flash card', 2200);
+    await addCardItem('Black Card', 'shadow card', 1900);
+    await addCardItem('White Card', 'light card', 2500);
 
   } catch (error) {
     console.log('Error during the process.......❌', error);
