@@ -1,6 +1,8 @@
 require('dotenv').config({ path: './env/.env' });
-
 const client = require("./client.cjs");
+const { addUserCard } = require('./users.cjs');
+
+
 
 const dropAllTables = async () => {
   try {
@@ -55,11 +57,15 @@ const createTables = async () => {
 const seedAsync = async () => {
   try {
     await client.connect();
-    console.log('Connection up and running.......✅');
-    
-    // Drop all tables first, then create the tables
+    console.log('Connection up and running.......✅');    
+  
     await dropAllTables();
     await createTables();
+    await addUserCard('randy20','cool20');
+    await addUserCard('mikequest','ten10');
+    await addUserCard('mariesmall','sweetlucky7');
+
+
 
   } catch (error) {
     console.log('Error during the process.......❌', error);
