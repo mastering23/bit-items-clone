@@ -155,3 +155,13 @@ http://localhost:3000/api/items
 
 ![alt text](img/image14.png)
 
+### issues with JWT and BEAR TOKEN 
+GET /api/auth/me 🔒
+----------------------
+POST /api/items/:itemId/reviews 🔒
+
+GET /api/reviews/me 🔒
+
+I'm unable to view the list on my Reviews because I'm receiving a 403 Forbidden error. Currently, I'm trying to check Postman to see how to get the view list. The list itself is working fine, as I can see the data in the PostgreSQL terminal when I run console.log
+ 
+![alt text](img/image15.png)

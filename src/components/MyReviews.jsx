@@ -22,14 +22,22 @@ function MyReviews() {
 
   return (
     <div className="p-4">
-      <h2>My Reviews</h2>
-      {message && <p>{message}</p>}
-      <ul>
-        {reviews.map(review => (
-          <li key={review.id}>{review.comment}</li>
-        ))}
-      </ul>
-    </div>
+    <h2>My Reviews</h2>
+    {message && <p>{message}</p>}
+    <ul>
+      {reviews.length > 0 ? (
+        reviews.map(review => (
+          <li key={review.id}>
+            {review.comment} - Rate: {review.rate}
+          </li>
+          
+        ))
+    
+      ) : (
+        <p>No reviews found</p>
+      )}
+    </ul>
+  </div>
   );
 }
 
