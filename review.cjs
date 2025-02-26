@@ -1,19 +1,19 @@
 const client = require('./client.cjs');
-const addReview = async (description, number) => {
+
+const addReview = async (comment, rate, userId, itemId) => {
   try {
-  
     const sqlCommand = `
-      INSERT INTO user_card_item (description, number)
-      VALUES ($1, $2)
+      INSERT INTO cardView (comment, rate, user_id, item_id)
+      VALUES ($1, $2, $3, $4)
       RETURNING *;
     `;
 
-    const result = await client.query(sqlCommand, [description, number]);
+    const result = await client.query(sqlCommand, [comment, rate, userId, itemId]);
 
-    console.log('user card item added: ', result.rows[0]);
+    console.log('Review added to cardView: ', result.rows[0]);
 
   } catch (error) {
-    console.log('Error adding user card item: ', error);
+    console.log('Error adding review to cardView: ', error);
   }
 };
 

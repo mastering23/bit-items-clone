@@ -87,10 +87,21 @@ const login = async (req, res) => {
   // res.send("User logged in!");
 };
 
-// Sample get authenticated user
+// Get authenticated user
 const getMe = async (req, res) => {
-  // Logic to get user info (protected route)
-  res.send("Authenticated user data");
+  try {
+    const userId = req.user.id; // assuming req.user is populated by the token-authenticator middleware
+    const result = await client.query("SELECT id, username FROM user_card WHERE id = $1", [userId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error fetching authenticated user:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 const getItems = async (req, res) => {

@@ -73,3 +73,59 @@ also console.log the fake data
 Server.cjs up and running 
 
 ![alt text](img/image9.png)
+
+
+###  postman Login ✅
+
+---------------------------
+
+```
+http://localhost:3000/api/auth/login
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+```
+
+![alt text](img/image10.png)
+
+
+
+
+
+###  postman Register ✅
+
+---------------------------
+
+```
+http://localhost:3000/api/auth/register
+
+{
+    "username": "johnDoe",
+    "password": "admin"
+}
+
+```
+
+![alt text](img/image11.png)
+
+###  postman get item by ID ✅
+
+---------------------------
+
+```
+http://localhost:3000/api/items/1
+
+[
+    {
+        "id": 1,
+        "name": "Red Card",
+        "description": "fire card",
+        "number": 2000
+    }
+]
+```
+
+![alt text](img/image12.png)
