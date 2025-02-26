@@ -129,3 +129,29 @@ http://localhost:3000/api/items/1
 ```
 
 ![alt text](img/image12.png)
+
+###  postman get api/auth/me ✅
+
+---------------------------
+
+```
+http://localhost:3000/api/auth/me
+
+
+```
+
+![alt text](img/image13.png)
+
+
+###  postman get /api/items ✅
+
+---------------------------
+
+```
+http://localhost:3000/api/items
+
+
+```
+
+![alt text](img/image14.png)
+
