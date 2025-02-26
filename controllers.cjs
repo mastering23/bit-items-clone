@@ -34,21 +34,28 @@ const register = async (req, res) => {
 
 
   } catch (error) {
+    
     console.error("Error logging in:", error);
+
     res.status(500).json({ message: "Server error" });
   }
 };
 
 // Sample login
+
 const login = async (req, res) => {
+
   // Logic to log in user and return JWT token
 
   const { username, password } = req.body;
 
   try {
     const result = await client.query(
+      
       "SELECT * FROM user_card WHERE username = $1",
+
       [username]
+
     );
 
     if (result.rows.length == 0) {
@@ -92,7 +99,8 @@ const getMe = async (req, res) => {
   try {
     const userId = req.user.id; // assuming req.user is populated by the token-authenticator middleware
     const result = await client.query("SELECT id, username FROM user_card WHERE id = $1", [userId]);
-
+    const message = result;
+    console.log('location | controllers.cjs | function getme \n ',message);
     if (result.rows.length === 0) {
       return res.status(404).json({ message: "User not found" });
     }

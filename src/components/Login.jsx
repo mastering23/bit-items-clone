@@ -34,7 +34,9 @@ function Login() {
       navigate('/items', { state: { username } });
       
     } catch (error) {
+
       setMessage(`Error occurred: ${error.message}`);
+      
     }
   };
 

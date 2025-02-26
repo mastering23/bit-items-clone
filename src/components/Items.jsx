@@ -36,9 +36,9 @@ function Items() {
            
             {item.name ? item.name : 'Unnamed item'} - ${item.description  ? item.number : 'N/A'}
             {/* it wasnt showing the right data because i had the wrong keyword on item bug fix  */}
-            {console.log(item.name)}
-            {console.log(item.price)}
-            {console.log(item.price)}
+            {/* {console.log(item.name)}
+            {console.log(item.description)}
+            {console.log(item.number)} */}
           </li>
         ))}
       </ul>

@@ -4,6 +4,10 @@ function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Extract token from Bearer <token>
 
+  
+  console.log('Auth Header:', authHeader); // Log the auth header for debugging
+  console.log('Token:', token); 
+  
   if (!token) return res.sendStatus(401); // No token, unauthorized
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
