@@ -162,10 +162,6 @@ POST /api/items/:itemId/reviews 🔒
 
 GET /api/reviews/me 🔒
 
-it doent allow me to view the list on my Reviews 
-because it 403 Forbidden error is return
-right now i am trying to check postman how to get 
-view list , the list working fine because i can console.log 
-on my postgres terminal and it show the tablet with the data.....
+I'm unable to view the list on my Reviews because I'm receiving a 403 Forbidden error. Currently, I'm trying to check Postman to see how to get the view list. The list itself is working fine, as I can see the data in the PostgreSQL terminal when I run console.log
  
 ![alt text](img/image15.png)
