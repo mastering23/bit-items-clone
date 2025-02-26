@@ -69,3 +69,7 @@ also console.log the fake data
 ![alt text](img/image7.png)
 ![alt text](img/image8.png)
 
+-------------
+Server.cjs up and running 
+
+![alt text](img/image9.png)

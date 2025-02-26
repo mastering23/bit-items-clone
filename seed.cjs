@@ -1,9 +1,8 @@
 require('dotenv').config({ path: './env/.env' });
-const { addCardItem } = require('./bititems.cjs');
 const client = require("./client.cjs");
+const { addReview } = require('./review.cjs');
+const { addCardItem } = require('./bititems.cjs');
 const { addUserCard } = require('./users.cjs');
-
-
 
 const dropAllTables = async () => {
   try {
@@ -38,14 +37,14 @@ const createTables = async () => {
         number INT NOT NULL
       );
 
-      -- Creating the user_card_item table (with foreign keys to user_card and card_item)
-      CREATE TABLE IF NOT EXISTS user_card_item (
-        id SERIAL PRIMARY KEY,
-        comment VARCHAR(100),
-        rate INT CHECK (rate >= 1 AND rate <= 10),
-        user_id INT REFERENCES user_card(id) ON DELETE CASCADE,
-        item_id INT REFERENCES card_item(id) ON DELETE CASCADE
-      );
+-- Creating the user_card_item table (with foreign keys to user_card and card_item)
+CREATE TABLE IF NOT EXISTS user_card_item (
+  id SERIAL PRIMARY KEY,
+  comment VARCHAR(100),
+  rate INT CHECK (rate >= 1 AND rate <= 10),
+  user_id INT REFERENCES user_card(id) ON DELETE CASCADE,
+  item_id INT REFERENCES card_item(id) ON DELETE CASCADE
+);
     `;
     await client.query(sqlCommand);
 
