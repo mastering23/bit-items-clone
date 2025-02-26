@@ -20,7 +20,7 @@ function Items() {
       }
     };
     fetchItems();
-  }, []);
+  },[]);
 
   if (error) {
     return <p>Error: {error}</p>;
@@ -28,17 +28,24 @@ function Items() {
 
   return (
     <div className="p-4">
-      <h2>Items</h2>
-      {items.length > 0 ? (
-        <ul>
-          {items.map(item => (
-            <li key={item.id}>{item.name} - ${item.price}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No items found</p>
-      )}
-    </div>
+    <h2>Items</h2>
+    {items.length > 0 ? (
+      <ul>
+        {items.map(item => (
+          <li key={item.id}>
+           
+            {item.name ? item.name : 'Unnamed item'} - ${item.description  ? item.number : 'N/A'}
+            {/* it wasnt showing the right data because i had the wrong keyword on item bug fix  */}
+            {console.log(item.name)}
+            {console.log(item.price)}
+            {console.log(item.price)}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>No items found</p>
+    )}
+  </div>
   );
 }
 
