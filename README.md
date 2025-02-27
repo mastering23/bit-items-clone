@@ -165,3 +165,37 @@ GET /api/reviews/me 🔒
 I'm unable to view the list on my Reviews because I'm receiving a 403 Forbidden error. Currently, I'm trying to check Postman to see how to get the view list. The list itself is working fine, as I can see the data in the PostgreSQL terminal when I run console.log
  
 ![alt text](img/image15.png)
+
+
+GET /api/reviews/me 🔒✅
+
+I'm able to call /api/auth/me using jwt token
+ 
+![alt text](img/image-16.png)
+
+
+POST /api/items/:itemId/reviews 🔒✅
+
+I'm able to call /api/auth/me using jwt token
+ 
+![alt text](img/image17.png)
+
+
+GET /api/reviews/me 🔒✅
+
+I'm able to call /api/reviews/me using jwt token
+ 
+![alt text](img/image18.png)
+
+
+DELETE /api/reviews/:reviewId 🔒✅
+
+I'm able to DELETE an item using endpoint:
+ /api/reviews/:reviewId  using jwt token
+ 
+![alt text](img/image19.png)
+
+
+
+
+

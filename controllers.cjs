@@ -5,13 +5,11 @@ const saltRounds = 10;
 
 require('dotenv').config({ path: './env/.env' });
 
-// Sample user registration
+// User registration
 const register = async (req, res) => {
-
   const { username, password } = req.body;
 
   try {
-    
     const result = await client.query(
       "SELECT * FROM user_card WHERE username = $1",
       [username]
@@ -30,32 +28,20 @@ const register = async (req, res) => {
     );
 
     res.send(registerResponse);
-
-
-
   } catch (error) {
-    
-    console.error("Error logging in:", error);
-
+    console.error("Error registering:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-// Sample login
-
+// User login
 const login = async (req, res) => {
-
-  // Logic to log in user and return JWT token
-
   const { username, password } = req.body;
 
   try {
     const result = await client.query(
-      
       "SELECT * FROM user_card WHERE username = $1",
-
       [username]
-
     );
 
     if (result.rows.length == 0) {
@@ -64,75 +50,61 @@ const login = async (req, res) => {
     }
 
     const user = result.rows[0];
-    console.log(user);
-
     const isValidPassword = await bcrypt.compare(password, user.password);
 
-    if(!isValidPassword) {
+    if (!isValidPassword) {
       res.status(401).send("Invalid credentials");
       return;
     }
 
     const token = jwt.sign(
-      { id: user.id, username: user.username }, // Payload (user info)
-      process.env.JWT_SECRET, // Secret key
-      { expiresIn: '1h' } // Token expires in 1 hour
+      { id: user.id, username: user.username },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
     );
 
-    // Step 4: Send the token as a response
-    console.log(token);
-    res.json({ token });
-
-    // console.log('Query Result:', result);  
-
+    res.json({ token, username: user.username });
 
   } catch (error) {
     console.error("Error logging in:", error);
     res.status(500).json({ message: "Server error" });
   }
-
-  // res.send("User logged in!");
 };
 
 // Get authenticated user
 const getMe = async (req, res) => {
   try {
-    const userId = req.user.id; // assuming req.user is populated by the token-authenticator middleware
+    const userId = req.user.id; 
     const result = await client.query("SELECT id, username FROM user_card WHERE id = $1", [userId]);
-    const message = result;
-    console.log('location | controllers.cjs | function getme \n ',message);
+    
     if (result.rows.length === 0) {
       return res.status(404).json({ message: "User not found" });
     }
-
     res.json(result.rows[0]);
   } catch (error) {
-    console.error("Error fetching authenticated user:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
+// Get all items
 const getItems = async (req, res) => {
   try {
     const result = await client.query("SELECT * FROM card_item");
-
-    res.send(result.rows)
-    
+    res.send(result.rows);
   } catch (error) {
-    console.error("Error logging in:", error);
+    console.error("Error fetching items:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
+// Get item by ID
 const getItemById = async (req, res) => {
   const id = req.params.itemId;
   try {
-    const result = await client.query("SELECT * FROM card_item where id = $1", [id]);
-
-    res.send(result.rows)
-    
+    const result = await client.query("SELECT * FROM card_item WHERE id = $1", [id]);
+    res.send(result.rows);
   } catch (error) {
-    console.error("Error logging in:", error);
+    console.error("Error fetching item:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -152,11 +124,11 @@ const getItemReviews = async (req, res) => {
   }
 };
 
-// Post a review for a specific item (only for authenticated users)
+// Post a review for a specific item
 const postReview = async (req, res) => {
   const { comment, rate } = req.body;
   const itemId = req.params.itemId;
-  const userId = req.user.id; // assuming req.user is populated by the token-authenticator middleware
+  const userId = req.user.id;
 
   try {
     const result = await client.query(
@@ -172,8 +144,8 @@ const postReview = async (req, res) => {
 
 // Get reviews made by the authenticated user
 const getMyReviews = async (req, res) => {
-  const userId = req.user.id;
   try {
+    const userId = req.user.id;
     const result = await client.query(
       "SELECT * FROM user_card_item WHERE user_id = $1",
       [userId]
@@ -185,7 +157,7 @@ const getMyReviews = async (req, res) => {
   }
 };
 
-// Delete a review by review ID (only for authenticated users)
+// Delete a review by review ID
 const deleteReview = async (req, res) => {
   const reviewId = req.params.reviewId;
   const userId = req.user.id;
@@ -196,6 +168,10 @@ const deleteReview = async (req, res) => {
       [reviewId, userId]
     );
 
+    console.log('reviewId: ', reviewId);
+    console.log('userId: ', userId);
+    
+    // console.log('result: ', result);
     if (result.rows.length === 0) {
       return res.status(404).json({ message: "Review not found or unauthorized" });
     }
@@ -206,9 +182,6 @@ const deleteReview = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-// Implement other controllers similarly for items, reviews
-// Example for fetching items, reviews, posting a review, etc.
 
 module.exports = {
   register,
