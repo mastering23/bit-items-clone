@@ -2,20 +2,18 @@ const jwt = require('jsonwebtoken');
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Extract token from Bearer <token>
-
+  const token = authHeader && authHeader.split(' ')[1];
   
-  console.log('Auth Header:', authHeader); // Log the auth header for debugging
-  console.log('Token:', token); 
-  
-  if (!token) return res.sendStatus(401); // No token, unauthorized
+console.log('token: ', token);
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403); // Invalid token, forbidden
+  if (!token) return res.sendStatus(401);
 
-    req.user = user; // Attach user object to request
-    next(); // Continue to the next middleware or route handler
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+
+    req.user = user;
+    next();
   });
 }
 
-module.exports = authenticateToken;
+module.exports = { authenticateToken };
